@@ -8,9 +8,26 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "BaseChar",
+"language": "GDScript",
+"path": "res://BaseChar.gd"
+}, {
+"base": "BaseChar",
+"class": "BaseEnemy",
+"language": "GDScript",
+"path": "res://BaseEnemy.gd"
+}, {
+"base": "Object",
+"class": "Damage",
+"language": "GDScript",
+"path": "res://Damage.gd"
+} ]
 _global_script_class_icons={
-
+"BaseChar": "",
+"BaseEnemy": "",
+"Damage": ""
 }
 
 [application]
