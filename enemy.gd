@@ -1,6 +1,8 @@
-extends KinematicBody2D
+extends BaseChar
+class_name enemy
 
-export var speed = 10
+export var baseSpeed: int = 10
+export var baseDamage: float = 10.0
 var velocity = Vector2()
 export var direction = -1
 export var detects_cliffs = true
@@ -19,13 +21,13 @@ func _physics_process(delta):
 		$floor_checker.position.x = $CollisionShape2D.shape.get_extents().x * direction
 		
 	velocity.y += 4
-	velocity.x = speed * direction
+	velocity.x = baseSpeed * direction
 	velocity = move_and_slide(velocity,Vector2.UP)
 
 
 func _on_top_checker_body_entered(body):
 	$AnimatedSprite.play("squashed")
-	speed = 0
+	baseSpeed = 0
 	set_collision_layer_bit(4,false)
 	set_collision_mask_bit(0,false)
 	$top_checker.set_collision_layer_bit(4,false)
@@ -37,10 +39,15 @@ func _on_top_checker_body_entered(body):
 	
 
 
-func _on_sides_checker_body_entered(body):
-	print("ouch")
+func _on_sides_checker_body_entered(body:BaseChar) -> void:
 	#get_tree().change_scene("res://Level1.tscn")
-	body.ouch(position.x,position.y)
+	#var dmgAmnt :float = baseDamage*( Global.rng.randfn(1.0,0.2) );# Multiply base damage by RNG normal dist w/ mean of 1.0 and std dev of 0.2
+	var dmgAmnt :float = baseDamage*( 1 );# Error from above line "Invalid get index 'rng' (on base: 'GDScript').", so just set it to 1 for now.
+	#var dmgType = Damage.TOXIC;# (dynamic type for now) Not sure how to handle ENUMs w/ static typing in godot so giving up
+	var dmgType = 3;# Can't even use enums from other class in previous line... Resorting to magic numbers
+	var egressDmg = Damage.new( dmgAmnt, dmgType )
+	print("Generating dmgAmnt: %f of dmgType %d" % [egressDmg.amount, egressDmg.type])
+	body.ingressAttack( position, egressDmg )
 
 func _on_Timer_timeout():
 	queue_free()

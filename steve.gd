@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends BaseChar
 
 
 # Declare member variables here. Examples:
@@ -46,20 +46,29 @@ func _on_fallzone_body_entered(body):
 func bounce():
 	velocity.y = jumpforce*0.5
 	
-func ouch(var enemy_posx,var enemy_posy):
-	set_modulate(Color(1,.5,.5,.5))
+func ingressAttack( enemy_pos, ingressDmg ):
+	
 	velocity.y = jumpforce * 0.4
 	
-	if position.x < enemy_posx:
+	if position.x < enemy_pos.x:
 		velocity.x = -jumpforce * 0.6
-	elif position.x > enemy_posx:
+	elif position.x > enemy_pos.x:
 		velocity.x = -jumpforce * 0.6
-		
+	
+	# Taking over control of the charecter 
 	Input.action_release("left")
 	Input.action_release("right")
-	
+	#for dmg in ingressDmg.dmgs.values():
+	#	# In the future we can add resistance to certain types of damage but for now subtract all damage types from HP
+	#	hp -= dmg
+	hp -= ingressDmg.amount
+	print("Recieved dmgAmnt: %f of dmgType %d REMAINING HP:%f" % [ingressDmg.amount, ingressDmg.type, hp])
 	$Timer.start()
 
 
 func _on_Timer_timeout():
-	get_tree().change_scene("res://Level1.tscn")
+	if hp > 0:
+		set_modulate(Color(1,1,1,1))
+	else:
+		get_tree().change_scene("res://Level1.tscn")
+

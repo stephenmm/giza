@@ -2,14 +2,14 @@ extends KinematicBody2D
 class_name BaseChar
 
 
-var hp: float
-var energy: float
+var hp: float = 100.0
+var energy: float = 100.0
 
 var ingressDmgModifiers:Dictionary
 var  egressDmgModifiers:Dictionary
 
 func _init():
-	for dmgType in Damage.Type:
+	for dmgType in Damage.DMGTYPE:
 		ingressDmgModifiers[dmgType] = 0.0
 		egressDmgModifiers[dmgType] = 0.0
 
