@@ -12,22 +12,22 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "BaseChar",
 "language": "GDScript",
-"path": "res://BaseChar.gd"
+"path": "res://charecters/BaseChar.gd"
 }, {
 "base": "BaseChar",
 "class": "BaseEnemy",
 "language": "GDScript",
-"path": "res://BaseEnemy.gd"
+"path": "res://charecters/enemies/BaseEnemy.gd"
 }, {
 "base": "RigidBody2D",
 "class": "BaseItem",
 "language": "GDScript",
-"path": "res://BaseItem.gd"
+"path": "res://models/items/BaseItem.gd"
 }, {
 "base": "Object",
 "class": "Damage",
 "language": "GDScript",
-"path": "res://Damage.gd"
+"path": "res://models/concepts/Damage.gd"
 }, {
 "base": "Node",
 "class": "Global",
@@ -37,7 +37,7 @@ _global_script_classes=[ {
 "base": "BaseChar",
 "class": "enemy",
 "language": "GDScript",
-"path": "res://enemy.gd"
+"path": "res://charecters/enemies/enemy.gd"
 } ]
 _global_script_class_icons={
 "BaseChar": "",
@@ -51,8 +51,8 @@ _global_script_class_icons={
 [application]
 
 config/name="Platformer Game"
-run/main_scene="res://TitleScreen.tscn"
-config/icon="res://icon.png"
+run/main_scene="res://scenes/title/TitleScreen.tscn"
+config/icon="res://scenes/lvls/lvl1_intro_cave/icon.png"
 
 [display]
 
