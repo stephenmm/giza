@@ -41,7 +41,7 @@ func _physics_process(delta):
 
 
 func _on_fallzone_body_entered(body):
-	get_tree().change_scene("res://Level1.tscn")
+	get_tree().change_scene("res://scenes/lvls/lvl1_intro_cave/Level1.tscn")
 
 func bounce():
 	velocity.y = jumpforce*0.5
@@ -70,5 +70,5 @@ func _on_Timer_timeout():
 	if hp > 0:
 		set_modulate(Color(1,1,1,1))
 	else:
-		get_tree().change_scene("res://Level1.tscn")
+		get_tree().change_scene("res://scenes/lvls/lvl1_intro_cave/Level1.tscn")
 
