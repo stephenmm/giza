@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/MBlasterStdGun2LFrame1.png-cdbf35a0ff24f037f161321a922c50e5.stex"
+path="res://.import/slimeBlue_blue.png-c96bb23a21c4f4279aaff4e97260c23f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://MBlasterStdGun2LFrame1.png"
-dest_files=[ "res://.import/MBlasterStdGun2LFrame1.png-cdbf35a0ff24f037f161321a922c50e5.stex" ]
+source_file="res://charecters/enemies/slimeBlue_blue.png"
+dest_files=[ "res://.import/slimeBlue_blue.png-c96bb23a21c4f4279aaff4e97260c23f.stex" ]
 
 [params]
 

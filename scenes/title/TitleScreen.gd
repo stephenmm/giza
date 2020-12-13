@@ -20,4 +20,4 @@ func _process(delta):
 
 
 func _on_NewGame_pressed():
-	get_tree().change_scene("res://Level1.tscn")
+	get_tree().change_scene("res://scenes/lvls/lvl1_intro_cave/Level1.tscn")
