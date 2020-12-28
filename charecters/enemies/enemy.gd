@@ -1,9 +1,7 @@
 extends BaseChar
 class_name enemy
 
-export var baseSpeed: int = 10
-export var baseDamage: float = 10.0
-var velocity = Vector2()
+
 export var direction = -1
 export var detects_cliffs = true
 
@@ -13,6 +11,7 @@ func _ready():
 		$AnimatedSprite.flip_h = true
 	$floor_checker.position.x = $CollisionShape2D.shape.get_extents().x * direction
 	$floor_checker.enabled = detects_cliffs
+	derivedCharSpeedModifier = 0.1
 
 func _physics_process(delta):
 	if is_on_wall() or not $floor_checker.is_colliding() and detects_cliffs and is_on_floor():
@@ -21,13 +20,15 @@ func _physics_process(delta):
 		$floor_checker.position.x = $CollisionShape2D.shape.get_extents().x * direction
 		
 	velocity.y += 4
-	velocity.x = baseSpeed * direction
+	velocity.x = _get_default_speed() * direction
 	velocity = move_and_slide(velocity,Vector2.UP)
 
 
 func _on_top_checker_body_entered(body):
+	#if body.has_method("get_class_name"):
+	#	if body.get_class_name() == "steve":
 	$AnimatedSprite.play("squashed")
-	baseSpeed = 0
+	dynamicSpeedModifier = 0.0
 	set_collision_layer_bit(4,false)
 	set_collision_mask_bit(0,false)
 	$top_checker.set_collision_layer_bit(4,false)
@@ -35,7 +36,7 @@ func _on_top_checker_body_entered(body):
 	$sides_checker.set_collision_layer_bit(4,false)
 	$sides_checker.set_collision_mask_bit(0,false)
 	$Timer.start()
-	body.bounce()
+	#body.bounce()
 	
 
 
@@ -47,7 +48,7 @@ func _on_sides_checker_body_entered(body:BaseChar) -> void:
 	var dmgType = 3;# Can't even use enums from other class in previous line... Resorting to magic numbers
 	var egressDmg = Damage.new( dmgAmnt, dmgType )
 	print("Generating dmgAmnt: %f of dmgType %d" % [egressDmg.amount, egressDmg.type])
-	body.ingressAttack( position, egressDmg )
+	body.ingressAttack( egressDmg )
 
 func _on_Timer_timeout():
 	queue_free()
