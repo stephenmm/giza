@@ -1,8 +1,6 @@
 extends BaseChar
 class_name enemy
 
-
-export var direction = -1
 export var detects_cliffs = true
 
 # Called when the node enters the scene tree for the first time.
@@ -19,9 +17,9 @@ func _physics_process(delta):
 		$AnimatedSprite.flip_h = not $AnimatedSprite.flip_h
 		$floor_checker.position.x = $CollisionShape2D.shape.get_extents().x * direction
 		
-	velocity.y += 4
-	velocity.x = _get_default_speed() * direction
-	velocity = move_and_slide(velocity,Vector2.UP)
+	vel.y += 4
+	vel.x = _get_default_speed() * direction
+	vel = move_and_slide(vel,Vector2.UP)
 
 
 func _on_top_checker_body_entered(body):
